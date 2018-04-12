@@ -1,0 +1,14 @@
+encrypt:
+  key: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+server:
+  port: 8080
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/fnualkatomar/spring-boot-config
+          search-paths:
+            - 'app*'
+        encrypt:
+          enabled: false

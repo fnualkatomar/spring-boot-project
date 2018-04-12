@@ -1,0 +1,19 @@
+encrypt:
+  key: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+server:
+  port: 8082
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8080
+  profiles:
+    active:
+      - dev
+  application:
+    name: app1
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          "*"
