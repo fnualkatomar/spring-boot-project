@@ -1,0 +1,13 @@
+server:
+  port: 9000
+  servlet:
+    context-path: /service
+spring:
+  application:
+    name: service2
+  sleuth:
+    sampler:
+      probability: 1.0
+logging:
+  level:
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
