@@ -3,6 +3,8 @@ package com.learning.rest.webservices.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,14 +31,14 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/users/{id}")
-	public User findOneUser(@PathVariable Integer id){
+	public User findOneUser(@PathVariable Integer id) throws NoSuchMethodException, SecurityException{
 		User user = userDao.findUserById(id);
 		if(user == null) throw new UserNotFoundEception("Unable to FindUser with Id-"+id);
 		return user;
 	}
 	
 	@PostMapping(value = "/users")
-	public ResponseEntity<Object> createUser(@RequestBody User user){
+	public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
 		User persistedUser =  userDao.saveUsers(user);
 		
 		URI uri =ServletUriComponentsBuilder
