@@ -25,9 +25,6 @@ import com.learning.rest.webservices.service.dao.UserRepository;
 public class UserJpaController {
 	
 	@Autowired
-	UserDaoService userDao;
-	
-	@Autowired
 	UserRepository userRepository;
 	
 	@GetMapping(value = "/jpa/users")
