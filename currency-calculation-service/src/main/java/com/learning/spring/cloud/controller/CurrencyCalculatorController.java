@@ -29,7 +29,7 @@ public class CurrencyCalculatorController {
 		uriVariables.put("to", to);
 		ResponseEntity<CurrencyCalculatedModel> response = new RestTemplate().getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyCalculatedModel.class, uriVariables );
 		CurrencyCalculatedModel currencyCalculatedModel = response.getBody();
-		return new CurrencyCalculatedModel(currencyCalculatedModel.getId(),currencyCalculatedModel.getFrm(), currencyCalculatedModel.getTo(), currencyCalculatedModel.getConversionMultiple(), 0, quantity, quantity.multiply(currencyCalculatedModel.getConversionMultiple()));
+		return new CurrencyCalculatedModel(currencyCalculatedModel.getId(),currencyCalculatedModel.getFrm(), currencyCalculatedModel.getTo(), currencyCalculatedModel.getConversionMultiple(), currencyCalculatedModel.getPort(), quantity, quantity.multiply(currencyCalculatedModel.getConversionMultiple()));
 	}
 	
 	
@@ -38,7 +38,7 @@ public class CurrencyCalculatorController {
 				@PathVariable String to, @PathVariable BigDecimal quantity) {
 		
 		CurrencyCalculatedModel currencyCalculatedModel = proxy.retrieveExchangeValue(from, to);
-		return new CurrencyCalculatedModel(currencyCalculatedModel.getId(),currencyCalculatedModel.getFrm(), currencyCalculatedModel.getTo(), currencyCalculatedModel.getConversionMultiple(), 0, quantity, quantity.multiply(currencyCalculatedModel.getConversionMultiple()));
+		return new CurrencyCalculatedModel(currencyCalculatedModel.getId(),currencyCalculatedModel.getFrm(), currencyCalculatedModel.getTo(), currencyCalculatedModel.getConversionMultiple(), currencyCalculatedModel.getPort(), quantity, quantity.multiply(currencyCalculatedModel.getConversionMultiple()));
 	}
 	
 }
