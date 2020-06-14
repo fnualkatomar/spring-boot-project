@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,8 @@ import com.learning.spring.cloud.model.CurrencyCalculatedModel;
 
 @RestController
 public class CurrencyCalculatorController {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	CurrencyExchangeProxy proxy;
@@ -38,7 +42,10 @@ public class CurrencyCalculatorController {
 				@PathVariable String to, @PathVariable BigDecimal quantity) {
 		
 		CurrencyCalculatedModel currencyCalculatedModel = proxy.retrieveExchangeValue(from, to);
-		return new CurrencyCalculatedModel(currencyCalculatedModel.getId(),currencyCalculatedModel.getFrm(), currencyCalculatedModel.getTo(), currencyCalculatedModel.getConversionMultiple(), currencyCalculatedModel.getPort(), quantity, quantity.multiply(currencyCalculatedModel.getConversionMultiple()));
+		
+		CurrencyCalculatedModel returnObj = new CurrencyCalculatedModel(currencyCalculatedModel.getId(),currencyCalculatedModel.getFrm(), currencyCalculatedModel.getTo(), currencyCalculatedModel.getConversionMultiple(), currencyCalculatedModel.getPort(), quantity, quantity.multiply(currencyCalculatedModel.getConversionMultiple()));
+		logger.info("CurrencyCalculatedModel {}", returnObj);
+		return returnObj;
 	}
 	
 }
